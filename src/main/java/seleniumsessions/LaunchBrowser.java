@@ -30,6 +30,15 @@ public class LaunchBrowser {
             System.out.println("tile is incorrect");
         }
 
+//       String pageSource = driver.getPageSource();
+//
+//        if(pageSource.contains("sahil.kumar9274@gmail.com")){
+//            System.out.println("string is present");
+//        }
+//        else{
+//            System.out.println("string is not present");
+//        }
+
         //closing the browser
         driver.quit();
     }
