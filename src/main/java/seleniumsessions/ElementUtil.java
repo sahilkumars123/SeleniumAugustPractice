@@ -6,7 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class ElementUtil {
 
-    WebDriver driver;
+    private WebDriver driver;
 
     public  ElementUtil(WebDriver driver){
         this.driver = driver;
@@ -15,6 +15,11 @@ public class ElementUtil {
     public void doSendKeys(By locator, String value){
 
         getElement(locator).sendKeys(value);
+    }
+
+    public void doClick(By locator){
+
+        getElement(locator).click();
     }
 
     public WebElement getElement(By locator){ //returning me a webelement
