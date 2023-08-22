@@ -1,6 +1,8 @@
 package seleniumsessions;
 
+import CustomException.FrameworkException;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -12,7 +14,13 @@ public class ElementUtil {
         this.driver = driver;
     }
 
+
     public void doSendKeys(By locator, String value){
+
+        if(value == null){
+            System.out.println("please pass the correct value");
+            throw new FrameworkException("VALUECANNOTBENULL");
+        }
 
         getElement(locator).sendKeys(value);
     }
@@ -26,9 +34,22 @@ public class ElementUtil {
         return getElement(locator).getText();
     }
 
-    public WebElement getElement(By locator){ //returning me a webelement
-
-        return driver.findElement(locator);
+    public WebElement getElement(By locator){//returning me a webelement
+        WebElement element = null;
+        try {
+             element =  driver.findElement(locator);
+        }
+        catch (NoSuchElementException e){
+            System.out.println("Please check your locator value");
+            e.printStackTrace();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException ex) {
+                throw new RuntimeException(ex);
+            }
+            element = driver.findElement(locator);
+        }
+        return element;
     }
 
     public Boolean checkElementIsDisplayed(By locator){

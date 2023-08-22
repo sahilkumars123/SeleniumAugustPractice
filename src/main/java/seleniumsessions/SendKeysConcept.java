@@ -15,13 +15,23 @@ public class SendKeysConcept {
 
         By firstname = By.id("input-firstname");
 
-        String text = "sahil";
-        StringBuffer sf = new StringBuffer("sail");
-        StringBuilder sf1 = new StringBuilder("sahil");
+//        String text = "sahil";
+//        StringBuffer sf = new StringBuffer("sail");
+//        StringBuilder sf1 = new StringBuilder("sahil");
+//
+//        System.out.println("this is my value"+"sahil");
+//
+//        driver.findElement(firstname).sendKeys(text,sf,sf1);
+//        driver.findElement(firstname).sendKeys(text+sf+sf1);
 
-        System.out.println("this is my value"+"sahil");
+//        driver.findElement(firstname).sendKeys("");
+//        driver.findElement(firstname).sendKeys(" ");
+        driver.findElement(firstname).sendKeys(null);
 
-        driver.findElement(firstname).sendKeys(text,sf,sf1);
-        driver.findElement(firstname).sendKeys(text+sf+sf1);
+       String title =  driver.getTitle();
+
+
+
+
     }
 }
