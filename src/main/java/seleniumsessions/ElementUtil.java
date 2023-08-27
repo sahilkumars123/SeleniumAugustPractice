@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,6 +97,56 @@ public class ElementUtil {
         return linksListText;
     }
 
+    //*************************** DropDown Utils ********************************//
 
+    public void selectFromDropDownByIndex(By locator, int index){
+
+        if(index < 0){
+            System.out.println("please pass the +ve index");
+            return;
+        }
+        Select select = new Select(getElement(locator));
+        select.selectByIndex(index);
+    }
+
+    public void selectFromDropDownByValue(By locator, String value){
+
+        if(value == null){
+            System.out.println("value cannot be null");
+            return;
+        }
+        Select select = new Select(getElement(locator));
+        select.selectByValue(value);
+    }
+
+    public void selectFromDropDownByVisibleText(By locator, String text){
+
+        if(text == null){
+            System.out.println("text cannot be null");
+            return;
+        }
+        Select select = new Select(getElement(locator));
+        select.selectByVisibleText(text);
+    }
+
+    public int getCountOfAllOptionsOfACountryDropDown(By locator){
+
+        Select select = new Select(getElement(locator));
+        List<WebElement> countryOptions = select.getOptions();
+        return countryOptions.size();
+    }
+
+    public List<String> getAllOptionsOfACountryDropDown(By locator){
+
+        Select select = new Select(getElement(locator));
+        List<WebElement> countryOptions = select.getOptions();
+        List<String> actualCountryOptions = new ArrayList<>();
+
+        for(WebElement e: countryOptions){
+            String text = e.getText();
+            actualCountryOptions.add(text);
+        }
+        return actualCountryOptions;
+    }
 }
 
