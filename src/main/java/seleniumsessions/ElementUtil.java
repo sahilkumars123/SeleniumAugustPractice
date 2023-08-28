@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
 import java.util.ArrayList;
@@ -148,5 +149,33 @@ public class ElementUtil {
         }
         return actualCountryOptions;
     }
+
+
+    //********************Actions Utils ***************************************//
+
+    public void twoLevelOfMenuHandling(By locator, String submenu){
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(getElement(locator)).build().perform();
+        By secondLevelOfMenu = By.linkText(submenu);
+        doClick(secondLevelOfMenu);
+    }
+
+    public void dragAndDropOperation(By source_locator, By target_locator){
+
+        Actions actions = new Actions(driver);
+        actions.dragAndDrop(getElement(source_locator), getElement(target_locator)).perform();
+    }
+
+    public void RightClickOperation(By locator, String optionValue){
+
+        Actions actions = new Actions(driver);
+        actions.contextClick(getElement(locator)).perform();
+        By option = By.xpath("//*[text()='"+optionValue+"']");
+        doClick(option);
+    }
+
+
+
 }
 
