@@ -175,7 +175,55 @@ public class ElementUtil {
         doClick(option);
     }
 
+    public  void doActionsClick(By locator){
+        Actions actions = new Actions(driver);
+        actions.click(getElement(locator)).perform();
+    }
 
+    public  void doActionsSendKeys(By locator, String value){
+        Actions actions = new Actions(driver);
+        actions.sendKeys(getElement(locator), value).perform();
+    }
+
+    /**
+     *
+     * @param It is accepting By locator
+     * @param It is for 2 level menuhandling
+     */
+    public void MultiLevelOfMenuHandling(By locator, String submenu){
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(getElement(locator)).build().perform();
+        By secondLevelOfMenu = By.linkText(submenu);
+        getElement(secondLevelOfMenu).click();
+    }
+
+
+    /**
+     * It is for 4 level menu handling
+     * @param locator
+     * @param menu1
+     * @param menu2
+     * @param menu3
+     * @throws InterruptedException
+     */
+    public void MultiLevelOfMenuHandling(By locator, String menu1, String menu2, String menu3) throws InterruptedException {
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(getElement(locator)).build().perform();
+        Thread.sleep(2000);
+
+        By level1 = By.linkText(menu1);
+        actions.moveToElement(getElement(level1)).build().perform();
+        Thread.sleep(2000);
+
+        By level2 = By.linkText(menu2);
+        actions.moveToElement(getElement(level2)).build().perform();
+        Thread.sleep(2000);
+
+        By level3 = By.linkText(menu3);
+        getElement(level3).click();
+    }
 
 }
 

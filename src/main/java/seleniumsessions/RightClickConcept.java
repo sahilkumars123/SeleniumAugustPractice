@@ -26,7 +26,7 @@ public class RightClickConcept {
         Actions actions = new Actions(driver);
         actions.contextClick(driver.findElement(right_click)).perform();
 
-        driver.findElement(option).click();
+       // driver.findElement(option).click();
 
 
 //        List<WebElement> options = driver.findElements(By.xpath("//ul[@class='context-menu-list context-menu-root']/li[contains(@class,'context-menu-icon')]"));
