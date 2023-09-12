@@ -1,5 +1,6 @@
 package seleniumsessions;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -40,28 +41,32 @@ public class MultiLevelOfMenuHandling {
         getElement(secondLevelOfMenu).click();
     }
 
-//    public static void getElementByLink(String value, Ac){
-//
-//
-//    }
+    public static WebElement getElementByLink(String linkText){
+
+     return driver.findElement(By.linkText(linkText));
+
+    }
 
     public static void MultiLevelOfMenuHandling(By locator, String menu1, String menu2, String menu3) throws InterruptedException {
 
         Actions actions = new Actions(driver);
-
+       Alert a = driver.switchTo().alert();
+       a.dismiss();
+       driver.switchTo().defaultContent();
+       
         Action action = actions.moveToElement(getElement(locator)).build();
         action.perform();
         Thread.sleep(2000);
 
-        By level1 = By.linkText(menu1);
-        actions.moveToElement(getElement(level1)).build().perform();
+//      By level1 = By.linkText(menu1);
+        actions.moveToElement(getElementByLink(menu1)).build().perform();
         Thread.sleep(2000);
 
-        By level2 = By.linkText(menu2);
-        actions.moveToElement(getElement(level2)).build().perform();
+    //  By level2 = By.linkText(menu2);
+        actions.moveToElement(getElementByLink(menu2)).build().perform();
         Thread.sleep(2000);
 
-        By level3 = By.linkText(menu3);
-        getElement(level3).click();
+     // By level3 = By.linkText(menu3);
+        getElementByLink(menu3).click();
     }
 }
