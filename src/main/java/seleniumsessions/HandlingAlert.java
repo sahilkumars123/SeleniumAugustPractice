@@ -50,7 +50,5 @@ public class HandlingAlert {
 	    }else {
 	    	System.out.println("TESTCASE::FAIL");
 	    }
-   
 	}
-
 }
