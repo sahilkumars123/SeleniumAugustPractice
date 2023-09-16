@@ -28,7 +28,7 @@ public class WindowHandle {
 
         String parentWindow = it.next();
 
-        driver.switchTo().window(parentWindow);
+        //driver.switchTo().window(parentWindow); -- this line is not required as I am already on parent window
         System.out.println("parent session id:: "+parentWindow);
         System.out.println("parent current url:: "+ driver.getCurrentUrl());
 
