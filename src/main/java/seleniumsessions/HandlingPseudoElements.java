@@ -12,7 +12,7 @@ public class HandlingPseudoElements {
 
         driver = new ChromeDriver();
         driver.get("https://naveenautomationlabs.com/opencart/index.php?route=account/register");
-        Thread.sleep(3000);
+        Thread.sleep(50000);
 
         String script = "return window.getComputedStyle(document.querySelector(\"label[for='input-telephone']\"),'::before').getPropertyValue('content')";
 

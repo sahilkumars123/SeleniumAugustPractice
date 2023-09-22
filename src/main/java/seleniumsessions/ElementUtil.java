@@ -6,8 +6,11 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -225,5 +228,31 @@ public class ElementUtil {
         getElement(level3).click();
     }
 
+
+    //***********************Wait Utils *******************************//
+
+
+    /**
+     * An expectation for checking that an element is present on the DOM of a page.
+     * This does not necessarily mean that the element is visible on the page.
+     */public WebElement presenceOfElementLocated(By locator, int timeInSeconds){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
+    }
+
+
+    /**
+     * An expectation for checking that an element is present on the DOM of a page and visible.
+     * Visibility means that the element is not only displayed but also has a height and width that is greater than 0.
+     * @param locator dsbsbdkbdsknds,
+     * @param timeInSeconds sdhksdbkjsd
+     * @return it is returnning
+     */
+    public WebElement visibilityOfElementLocated(By locator, int timeInSeconds){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
 }
+
+
 
