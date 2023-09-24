@@ -22,6 +22,9 @@ public class PresenceOfElement {
         By password = By.name("password");
         By loginBtn = By.tagName("button");
 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(username));
+
 
         /**
          * An expectation for checking that an element is present on the DOM of a page.
@@ -47,8 +50,8 @@ public class PresenceOfElement {
      * @param timeInSeconds sdhksdbkjsd
      * @return it is returnning
      */
-    private static WebElement visibilityOfElementLocated(By locator, int timeInSeconds){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
-    }
+//    private static WebElement visibilityOfElementLocated(By locator, int timeInSeconds){
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
+//        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+//    }
 }

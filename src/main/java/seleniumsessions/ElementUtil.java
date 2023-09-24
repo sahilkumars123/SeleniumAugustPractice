@@ -1,10 +1,7 @@
 package seleniumsessions;
 
 import CustomException.FrameworkException;
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -18,14 +15,15 @@ public class ElementUtil {
 
     private WebDriver driver;
 
-    public  ElementUtil(WebDriver driver){
+
+    public ElementUtil(WebDriver driver) {
         this.driver = driver;
     }
 
 
-    public void doSendKeys(By locator, String value){
+    public void doSendKeys(By locator, String value) {
 
-        if(value == null){
+        if (value == null) {
             System.out.println("please pass the correct value");
             throw new FrameworkException("VALUECANNOTBENULL");
         }
@@ -33,21 +31,21 @@ public class ElementUtil {
         getElement(locator).sendKeys(value);
     }
 
-    public void doClick(By locator){
+    public void doClick(By locator) {
 
         getElement(locator).click();
     }
 
-    public String doElementGetText(By locator){
+    public String doElementGetText(By locator) {
+
         return getElement(locator).getText();
     }
 
-    public WebElement getElement(By locator){//returning me a webelement
+    public WebElement getElement(By locator) {//returning me a webelement
         WebElement element = null;
         try {
-             element =  driver.findElement(locator);
-        }
-        catch (NoSuchElementException e){
+            element = driver.findElement(locator);
+        } catch (NoSuchElementException e) {
             System.out.println("Please check your locator value");
             e.printStackTrace();
             try {
@@ -60,15 +58,16 @@ public class ElementUtil {
         return element;
     }
 
-    public Boolean checkElementIsDisplayed(By locator){
+    public Boolean checkElementIsDisplayed(By locator) {
         return getElement(locator).isDisplayed();
     }
 
-    public String getElementAttribute(By locator, String attributeName){
+    public String getElementAttribute(By locator, String attributeName) {
         return getElement(locator).getAttribute(attributeName);
     }
 
-    public Boolean isElementDisabled(By locator){
+    public Boolean isElementDisabled(By locator) {
+
         return getElement(locator).isEnabled();
     }
 
@@ -81,20 +80,22 @@ public class ElementUtil {
 //    }
 
 
-    public  List<WebElement> getElements(By locator){
-        return  driver.findElements(locator);
+    public List<WebElement> getElements(By locator) {
+
+        return driver.findElements(locator);
     }
 
-    public  int getLinksCount(By locator){
+    public int getLinksCount(By locator) {
         return getElements(locator).size();
     }
 
-    public List<String> getElementsTextList(By locator){
+
+    public List<String> getElementsTextList(By locator) {
         List<WebElement> linksList = getElements(locator);
         List<String> linksListText = new ArrayList<>();
-        for(WebElement e: linksList){
+        for (WebElement e : linksList) {
             String text = e.getText();
-            if(!text.isEmpty()){
+            if (!text.isEmpty()) {
                 linksListText.add(text);
             }
         }
@@ -103,9 +104,9 @@ public class ElementUtil {
 
     //*************************** DropDown Utils ********************************//
 
-    public void selectFromDropDownByIndex(By locator, int index){
+    public void selectFromDropDownByIndex(By locator, int index) {
 
-        if(index < 0){
+        if (index < 0) {
             System.out.println("please pass the +ve index");
             return;
         }
@@ -113,9 +114,9 @@ public class ElementUtil {
         select.selectByIndex(index);
     }
 
-    public void selectFromDropDownByValue(By locator, String value){
+    public void selectFromDropDownByValue(By locator, String value) {
 
-        if(value == null){
+        if (value == null) {
             System.out.println("value cannot be null");
             return;
         }
@@ -123,9 +124,9 @@ public class ElementUtil {
         select.selectByValue(value);
     }
 
-    public void selectFromDropDownByVisibleText(By locator, String text){
+    public void selectFromDropDownByVisibleText(By locator, String text) {
 
-        if(text == null){
+        if (text == null) {
             System.out.println("text cannot be null");
             return;
         }
@@ -133,20 +134,20 @@ public class ElementUtil {
         select.selectByVisibleText(text);
     }
 
-    public int getCountOfAllOptionsOfACountryDropDown(By locator){
+    public int getCountOfAllOptionsOfACountryDropDown(By locator) {
 
         Select select = new Select(getElement(locator));
         List<WebElement> countryOptions = select.getOptions();
         return countryOptions.size();
     }
 
-    public List<String> getAllOptionsOfACountryDropDown(By locator){
+    public List<String> getAllOptionsOfACountryDropDown(By locator) {
 
         Select select = new Select(getElement(locator));
         List<WebElement> countryOptions = select.getOptions();
         List<String> actualCountryOptions = new ArrayList<>();
 
-        for(WebElement e: countryOptions){
+        for (WebElement e : countryOptions) {
             String text = e.getText();
             actualCountryOptions.add(text);
         }
@@ -156,7 +157,7 @@ public class ElementUtil {
 
     //********************Actions Utils ***************************************//
 
-    public void twoLevelOfMenuHandling(By locator, String submenu){
+    public void twoLevelOfMenuHandling(By locator, String submenu) {
 
         Actions actions = new Actions(driver);
         actions.moveToElement(getElement(locator)).build().perform();
@@ -164,36 +165,35 @@ public class ElementUtil {
         doClick(secondLevelOfMenu);
     }
 
-    public void dragAndDropOperation(By source_locator, By target_locator){
+    public void dragAndDropOperation(By source_locator, By target_locator) {
 
         Actions actions = new Actions(driver);
         actions.dragAndDrop(getElement(source_locator), getElement(target_locator)).perform();
     }
 
-    public void RightClickOperation(By locator, String optionValue){
+    public void RightClickOperation(By locator, String optionValue) {
 
         Actions actions = new Actions(driver);
         actions.contextClick(getElement(locator)).perform();
-        By option = By.xpath("//*[text()='"+optionValue+"']");
+        By option = By.xpath("//*[text()='" + optionValue + "']");
         doClick(option);
     }
 
-    public  void doActionsClick(By locator){
+    public void doActionsClick(By locator) {
         Actions actions = new Actions(driver);
         actions.click(getElement(locator)).perform();
     }
 
-    public  void doActionsSendKeys(By locator, String value){
+    public void doActionsSendKeys(By locator, String value) {
         Actions actions = new Actions(driver);
         actions.sendKeys(getElement(locator), value).perform();
     }
 
     /**
-     *
      * @param It is accepting By locator
      * @param It is for 2 level menuhandling
      */
-    public void MultiLevelOfMenuHandling(By locator, String submenu){
+    public void MultiLevelOfMenuHandling(By locator, String submenu) {
 
         Actions actions = new Actions(driver);
         actions.moveToElement(getElement(locator)).build().perform();
@@ -204,6 +204,7 @@ public class ElementUtil {
 
     /**
      * It is for 4 level menu handling
+     *
      * @param locator
      * @param menu1
      * @param menu2
@@ -235,24 +236,97 @@ public class ElementUtil {
     /**
      * An expectation for checking that an element is present on the DOM of a page.
      * This does not necessarily mean that the element is visible on the page.
-     */public WebElement presenceOfElementLocated(By locator, int timeInSeconds){
+     */
+
+    public WebElement presenceOfElementLocated(By locator, int timeInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
         return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
-
     /**
      * An expectation for checking that an element is present on the DOM of a page and visible.
      * Visibility means that the element is not only displayed but also has a height and width that is greater than 0.
-     * @param locator dsbsbdkbdsknds,
+     *
+     * @param locator       dsbsbdkbdsknds,
      * @param timeInSeconds sdhksdbkjsd
      * @return it is returnning
      */
-    public WebElement visibilityOfElementLocated(By locator, int timeInSeconds){
+    public WebElement visibilityOfElementLocated(By locator, int timeInSeconds) {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeInSeconds));
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
+
+
+    public Alert alertIsPrsent(int timeout){
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        return alert;
+    }
 }
+
+
+
+
+//   public void titleContains(String titleFraction, int timeout){
+//
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+//        try {
+//            if (wait.until(ExpectedConditions.titleContains(titleFraction))) {
+//                System.out.println("title fraction is correct");
+//            }
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//            System.out.println("tile fraction not found");
+//        }
+
+
+//        private static void titleIs(String title, int timeout){
+//
+//            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+//            try {
+//                if (wait.until(ExpectedConditions.titleIs(title))) {
+//                    System.out.println("title  is correct");
+//                }
+//            }
+//            catch (Exception e){
+//                e.printStackTrace();
+//                System.out.println("tile  not found");
+//            }
+//    }
+
+
+//    private static void urlToBe(String url, int timeout){
+//
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+//        try {
+//            if (wait.until(ExpectedConditions.urlToBe(url))) {
+//                System.out.println("url  is correct");
+//            }
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//            System.out.println("url  not found");
+//        }
+//    }
+
+//
+//        public  String urlContains(String urlFraction, int timeout) {
+//
+//            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
+//            try {
+//                if (wait.until(ExpectedConditions.urlContains(urlFraction))) {
+//                    System.out.println("url fraction is correct");
+//                    return driver.getCurrentUrl();
+//                }
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//                System.out.println("url fraction not found");
+//            }
+//            return null;
+//
+//        }
 
 
 

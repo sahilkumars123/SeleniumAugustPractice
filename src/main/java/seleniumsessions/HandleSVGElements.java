@@ -36,7 +36,6 @@ public class HandleSVGElements {
             if(text.equals("Nevada")){
                 e.click();
                 break;
-
             }
         }
     }
