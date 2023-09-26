@@ -28,7 +28,6 @@ public class PollingWaitConcept {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10), Duration.ofSeconds(2));
         wait.until(ExpectedConditions.visibilityOfElementLocated(email)).sendKeys("testing");
 
-
     }
 
 }

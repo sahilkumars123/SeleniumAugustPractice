@@ -263,6 +263,18 @@ public class ElementUtil {
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         return alert;
     }
+
+    public void pageLoadTimout(int timeOut){
+
+        WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(timeOut));
+        String flag = wait.until(ExpectedConditions.jsReturnsValue("return document.readyState == 'complete'")).toString();
+        if(Boolean.parseBoolean(flag)){
+            System.out.println("Page has been loaded successfully");
+        }
+        else {
+            System.out.println("page is not loaded");
+        }
+    }
 }
 
 
