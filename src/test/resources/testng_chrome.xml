@@ -12,24 +12,8 @@
             </classes>
     </test>
 
-    <test name="GoogleTest_firefox">
-        <parameter name="browserName" value="firefox"></parameter>
-        <parameter name="url" value="https://www.google.com/"></parameter>
-        <classes>
-            <class name="mytests.GoogleTest" />
-        </classes>
-    </test>
-
-    <test name="GoogleTest_edge">
-        <parameter name="browserName" value="edge"></parameter>
-        <parameter name="url" value="https://www.google.com/"></parameter>
-        <classes>
-            <class name="mytests.GoogleTest" />
-        </classes>
-    </test>
-
         <test name="OpenCartTest">
-            <parameter name="browserName" value="firefox"></parameter>
+            <parameter name="browserName" value="chrome"></parameter>
             <parameter name="url" value="https://naveenautomationlabs.com/opencart/index.php?route=account/login"></parameter>
             <classes>
                 <class name="mytests.OpenCartTest" />
@@ -37,7 +21,7 @@
         </test>
 
     <test name="OrangeHRMTest">
-        <parameter name="browserName" value="edge"></parameter>
+        <parameter name="browserName" value="chrome"></parameter>
         <parameter name="url" value="https://www.orangehrm.com/30-day-free-trial/"></parameter>
         <classes>
 			<class name="mytests.OrangeHRMTest" />

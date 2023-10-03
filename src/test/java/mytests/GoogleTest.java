@@ -9,20 +9,9 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-public class GoogleTest {
+public class GoogleTest extends BaseTest{
 
     //AAA -
-
-    WebDriver driver;
-
-    @BeforeTest
-    public void setup(){
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.manage().deleteAllCookies();
-        driver.get("https://www.google.com/");
-    }
-
 
     @Test(priority = 1)
     public void getTitle(){
@@ -44,11 +33,5 @@ public class GoogleTest {
         search.submit();
         Assert.assertTrue(driver.getCurrentUrl().contains("selenium"));
     }
-
-    @AfterTest
-    public void tearDown(){
-        driver.quit();
-    }
-
 
 }

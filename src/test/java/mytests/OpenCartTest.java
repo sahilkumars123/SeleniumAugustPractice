@@ -1,4 +1,19 @@
 package mytests;
 
-public class OpenCartTest {
+import org.testng.Assert;
+import org.testng.annotations.Test;
+
+public class OpenCartTest extends BaseTest {
+
+    @Test(priority = 1)
+    public void TitleTest() {
+        //driver.get("www.naveeen.com");
+        Assert.assertEquals(driver.getTitle(), "Account Login");
+    }
+
+    @Test(priority = 2)
+    public void URLTest() {
+        Assert.assertTrue(driver.getCurrentUrl().contains("account/login"));
+    }
+
 }
